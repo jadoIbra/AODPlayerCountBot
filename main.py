@@ -17,7 +17,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 def get_player_info():
     try:
-        response = requests.get("https://api.gamemonitoring.net/servers/1983891")
+        response = requests.get(settings.SERVER_API_SECRET)
         data = response.json()
 
         num_players = data['response']['numplayers']
@@ -29,9 +29,6 @@ def get_player_info():
         print(f"Error fetching player info: {e}")
         return None, None
 
-@bot.event
-async def on_ready():
-    print(f"Bot {bot.user} is ready and connected to Discord!")
 
 @bot.command(name="aod")
 async def player_info(ctx):
